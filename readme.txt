@@ -1,0 +1,14 @@
+图片放置于/web/resource/img中，对应路径为./resource/img/Livebeing-direction.gif
+因为initialWorldAlgaeFishCroc.html与resource位于同一子目录下。
+实现代码规范：尽可能应用get方法获取变量或常量而非直接写出变量名或常量所对应的整形数值，
+	       空返回值的方法不必要返回
+Catfish和Crocodile都是LivingBeing的子类，可以通过simulation中的方法实现某格周边区域的生物数量统计，从而实现鱼寻找食物的方法和
+移动到含有食物的格子的方法。以下以Catfish类为例介绍所参与书写的方法：
+setEnergy（int newEnergy）：判断输入的能量是否小于生活所需最小能量，若是则鱼死亡；判断输入的能量是否大于鱼所能容纳最大能量，若是则使其等于最大能量
+isHungry()：判断能量值是否小于2倍最小能量，若是则返回真
+moveToRow/Column(int newRow/newColumn)：若鱼还活着则通过新的行列与原行列的关系判断鱼的朝向，并判断输入的行列是否在10*10的池塘中
+getImage()：通过字符串比较返回不同朝向的鱼的图片
+lookForFoodInNeighborhood()：借助simulation中的getNeighbors方法获取包含了该格周围格子中的生物量，若生物为海草则返回附近的海草对象
+swimIfPossible()：判断鱼是否活着，是否饿了而判段鱼应游向的位置，若鱼或者且不饿则随机向四个方向移动一格
+eatIfPossible()：借助simulation中的getNeighbors方法获取该格的生物量，若生物为水草则获取一定能量，获取的能量数通过水草类的giveupenergy方法获得
+liveALittle()：鱼活了一个回合应该做的事和发生的变化
